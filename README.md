@@ -203,9 +203,42 @@ mutation ($name : String!, $genre: String!, $authorId: ID!) {   // $ 달러사�
 }
 ```
 
-  
+## 8. Input Type  
 
+```gql
+mutation CreateExperience($input: CreateExperienceInput!) { // CreateExperience 라는 mutation의 단지 이름. 
+                                                            // $input이라는 쿼리 변수 선언(이후 아래서 이 이름으로 관리)
+                                                            // CreateExperienceInput! 이것은 $input 의 타입...!
+createExperience(input: $input) {
+    id
+    title
+    subtitle
+    content
+    period
+  }
+}
 
+-------------
+query variable로 다음과 같이 전달.
+{
+  "input": {
+    "title": "프로그래밍 블로그 운영",
+    "subtitle": "구독자 288명 / 월 평균 방문자 10,000명",
+    "content": "단순히 기억을 기록하는 곳을 넘어, 다양한 개발자 이웃들과 소통하는 공간입니다.",
+		  "period": "2017.11 ~ "
+  }
+}
+```
+
+* 실제로 선언되어 있는 input 타입 
+```gql
+input CreateExperienceInput {
+	title: String!
+	subtitle: String!
+	content: String!
+	period: String!
+}
+```
 
 
 
